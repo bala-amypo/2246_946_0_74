@@ -1,4 +1,5 @@
 package com.example.demo.entity;
+import jakarta.
 
 public class Student{
     private Long id;
@@ -33,7 +34,6 @@ public class Student{
         this.id=id;
         Student_Name=student_Name;
         Student_Email=student_Email;
-        this.cgpa=cgpa
-
+        this.cgpa=cgpa;
     }    
 }
