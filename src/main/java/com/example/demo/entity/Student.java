@@ -28,5 +28,12 @@ public class Student{
     }
     public void setCgpa(){
         this.cgpa=cgpa;
-    }                                                                                                                                                                                                                                                                                
+    }
+    public Student(Long id,String name,String email,float cgpa){
+        this.id=id;
+        Student_Name=student_Name;
+        Student_Email=student_Email;
+        this.cgpa=cgpa
+
+    }    
 }
