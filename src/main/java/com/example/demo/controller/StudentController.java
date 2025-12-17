@@ -13,7 +13,7 @@ public class StudentController {
 
     @Autowired
     StudentService stser;
-    @PostMa
+   
     @GetMapping("/fetchrecord")
     public List<Student> fetchRecord(){
       return stser.fetchRecord();
