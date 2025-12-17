@@ -19,7 +19,8 @@ public class StudentController {
       return stser.fetchRecord();
     }
 
-}pping("/adddata")
+@PostMapping("/adddata")
     public Student createData(@RequestBody Student stu){
        return stser.createData(stu);
     }
+}
