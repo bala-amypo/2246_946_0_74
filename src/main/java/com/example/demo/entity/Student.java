@@ -1,5 +1,5 @@
 package com.example.demo.entity;
-import jakarta.
+import jakarta.per
 @Entity
 public class Student{
     private Long id;
