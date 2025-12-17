@@ -38,10 +38,8 @@ public class Student{
         this.stuemail = stuemail;
         this.cgpa = cgpa;
     }
-
     public Student(){
-
-    }
-
+        
+    }
 
 }

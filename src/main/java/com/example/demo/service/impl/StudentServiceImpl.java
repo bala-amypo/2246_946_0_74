@@ -15,12 +15,12 @@ public class ServiceImplement implements StudentService {
     StudentRepository repo;
 
     @Override
-    public Student createDAta(Student stu) {
+    public Student createData(Student stu) {
         return repo.save(stu);
     }
 
     @Override
-    public List<Student> fetchDAta(){
+    public List<Student> fetchData(){
         return repo.findAll();
     }
 
