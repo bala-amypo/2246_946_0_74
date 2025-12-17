@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 import jakarta.
-
+@Entity
 public class Student{
     private Long id;
     private String name;
