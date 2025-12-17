@@ -13,13 +13,13 @@ public class StudentController {
 
     @Autowired
     StudentService stser;
-    @PostMapping("/adddata")
-    public Student createData(@RequestBody Student stu){
-       return stser.createData(stu);
-    }
+    @PostMa
     @GetMapping("/fetchrecord")
     public List<Student> fetchRecord(){
       return stser.fetchRecord();
     }
-    
-}
+
+}pping("/adddata")
+    public Student createData(@RequestBody Student stu){
+       return stser.createData(stu);
+    }
