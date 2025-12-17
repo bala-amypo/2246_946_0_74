@@ -16,5 +16,7 @@ public class StudentController{
         return ser.createData(stu)
     }
     @GetMapping("/fetchrecord")
-    public List<Student>fetchRecord()
+    public List<Student>fetchRecord(){
+        return ser.fetchRecord();
+    }
 }
