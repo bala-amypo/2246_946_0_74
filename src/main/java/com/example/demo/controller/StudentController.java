@@ -13,7 +13,7 @@ public class StudentController{
     StudentService ser;
     @PostMapping("/adddata")
     public Student createData(@RequestBody Student stu){
-        return ser.createData(stu)
+        return ser.createData(stu);
     }
     @GetMapping("/fetchrecord")
     public List<Student>fetchRecord(){
