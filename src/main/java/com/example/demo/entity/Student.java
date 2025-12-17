@@ -1,9 +1,10 @@
 package com.example.demo.entity;
-import jakarta.per
+import jakarta.persistence.*;
 @Entity
 public class Student{
+    @Id
     private Long id;
-    private String name;
+    private String stuname;
     private String email;
     private float cgpa;
     public Long getId(){
