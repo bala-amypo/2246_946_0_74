@@ -9,7 +9,7 @@ import com.example.demo.service.StudentService;
 import org. springframework.stereotype.Service;
 
 @Service
-public class ServiceImplement implements StudentService {
+public class StudentServiceImpl implements StudentService {
 
     @Autowired
     StudentRepository repo;
@@ -20,7 +20,7 @@ public class ServiceImplement implements StudentService {
     }
 
     @Override
-    public List<Student> fetchData(){
+    public List<Student> fetchRecord(){
         return repo.findAll();
     }
 
