@@ -1,9 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class EligibilityResult {
@@ -17,7 +14,11 @@ public class EligibilityResult {
     private String riskLevel;
     private String reason;
 
-    // ✅ Getters & Setters
+    @OneToOne
+    @JoinColumn(name = "loan_request_id")
+    private LoanRequest loanRequest;
+
+    // 🔹 Getters & Setters
 
     public Long getId() {
         return id;
@@ -53,5 +54,13 @@ public class EligibilityResult {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public LoanRequest getLoanRequest() {
+        return loanRequest;
+    }
+
+    public void setLoanRequest(LoanRequest loanRequest) {
+        this.loanRequest = loanRequest;
     }
 }
