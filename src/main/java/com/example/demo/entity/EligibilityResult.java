@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class EligibilityResult {
@@ -11,23 +13,45 @@ public class EligibilityResult {
     private Long id;
 
     private boolean eligible;
-    private String rejectionReason;
-    private Double maxEligibleAmount;
-    private Double estimatedEmi;
+    private double emi;
     private String riskLevel;
+    private String reason;
 
-    @OneToOne
-    private LoanRequest loanRequest;
+    // ✅ Getters & Setters
 
-    public void setLoanRequest(LoanRequest loanRequest) {
-        this.loanRequest = loanRequest;
+    public Long getId() {
+        return id;
+    }
+
+    public boolean isEligible() {
+        return eligible;
     }
 
     public void setEligible(boolean eligible) {
         this.eligible = eligible;
     }
 
-    public void setRejectionReason(String rejectionReason) {
-        this.rejectionReason = rejectionReason;
+    public double getEmi() {
+        return emi;
+    }
+
+    public void setEmi(double emi) {
+        this.emi = emi;
+    }
+
+    public String getRiskLevel() {
+        return riskLevel;
+    }
+
+    public void setRiskLevel(String riskLevel) {
+        this.riskLevel = riskLevel;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }
