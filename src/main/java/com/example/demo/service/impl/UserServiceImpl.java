@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service   // ⭐⭐⭐ THIS IS THE FIX ⭐⭐⭐
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -31,5 +31,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public User getById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
