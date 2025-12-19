@@ -4,41 +4,36 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class LoanRequest {
+@Table(name = "risk_assessment_logs")
+public class RiskAssessmentLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String riskLevel;
+
+    private Double dtiRatio;
+
+    private LocalDateTime assessedAt;
+
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "loan_request_id")
+    private LoanRequest loanRequest;
 
-    @Column(nullable = false)
-    private Double requestedAmount;
+    // getters & setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    @Column(nullable = false)
-    private Integer tenureMonths;
+    public String getRiskLevel() { return riskLevel; }
+    public void setRiskLevel(String riskLevel) { this.riskLevel = riskLevel; }
 
-    private String purpose;
+    public Double getDtiRatio() { return dtiRatio; }
+    public void setDtiRatio(Double dtiRatio) { this.dtiRatio = dtiRatio; }
 
-    private String status = "PENDING";
+    public LocalDateTime getAssessedAt() { return assessedAt; }
+    public void setAssessedAt(LocalDateTime assessedAt) { this.assessedAt = assessedAt; }
 
-    private LocalDateTime appliedAt = LocalDateTime.now();
-
-    @OneToOne(mappedBy = "loanRequest", cascade = CascadeType.ALL)
-    private EligibilityResult eligibilityResult;
-
-    // Constructors
-    public LoanRequest() {}
-
-    public LoanRequest(User user, Double requestedAmount, Integer tenureMonths, String purpose) {
-        this.user = user;
-        this.requestedAmount = requestedAmount;
-        this.tenureMonths = tenureMonths;
-        this.purpose = purpose;
-    }
-
-    // Getters and Setters
-    // ...
+    public LoanRequest getLoanRequest() { return loanRequest; }
+    public void setLoanRequest(LoanRequest loanRequest) { this.loanRequest = loanRequest; }
 }
