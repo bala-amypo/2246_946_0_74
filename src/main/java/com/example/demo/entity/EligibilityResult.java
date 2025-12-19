@@ -1,3 +1,8 @@
+package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
 @Entity
 public class EligibilityResult {
 
@@ -5,24 +10,38 @@ public class EligibilityResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean eligible;
-    private String rejectionReason;
-    private Double maxEligibleAmount;
-    private Double estimatedEmi;
-    private String riskLevel;
-
     @OneToOne
+    @JoinColumn(name = "loan_request_id", nullable = false)
     private LoanRequest loanRequest;
 
-    public void setLoanRequest(LoanRequest loanRequest) {
+    @Column(nullable = false)
+    private Boolean isEligible;
+
+    @Column(nullable = false)
+    private Double maxEligibleAmount;
+
+    @Column(nullable = false)
+    private Double estimatedEmi;
+
+    @Column(nullable = false)
+    private String riskLevel; // LOW, MEDIUM, HIGH
+
+    private String rejectionReason;
+
+    private LocalDateTime calculatedAt = LocalDateTime.now();
+
+    // Constructors
+    public EligibilityResult() {}
+
+    public EligibilityResult(LoanRequest loanRequest, Boolean isEligible, Double maxEligibleAmount,
+                             Double estimatedEmi, String riskLevel, String rejectionReason) {
         this.loanRequest = loanRequest;
-    }
-
-    public void setEligible(boolean eligible) {
-        this.eligible = eligible;
-    }
-
-    public void setRejectionReason(String rejectionReason) {
+        this.isEligible = isEligible;
+        this.maxEligibleAmount = maxEligibleAmount;
+        this.estimatedEmi = estimatedEmi;
+        this.riskLevel = riskLevel;
         this.rejectionReason = rejectionReason;
     }
+
+    
 }
