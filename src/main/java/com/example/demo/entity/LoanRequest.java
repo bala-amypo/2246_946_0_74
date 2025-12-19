@@ -10,36 +10,21 @@ public class LoanRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Double amount;
+    private Integer tenureMonths;
+    private String status;
+
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false)
-    private Double requestedAmount;
+    public Long getId() { return id; }
+    public Double getAmount() { return amount; }
+    public void setAmount(Double amount) { this.amount = amount; }
 
-    @Column(nullable = false)
-    private Integer tenureMonths;
+    public Integer getTenureMonths() { return tenureMonths; }
 
-    private String purpose;
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    private String status = "PENDING";
-
-    private LocalDateTime appliedAt = LocalDateTime.now();
-
-    @OneToOne(mappedBy = "loanRequest", cascade = CascadeType.ALL)
-    private EligibilityResult eligibilityResult;
-
-    // Constructors
-    public LoanRequest() {}
-
-    public LoanRequest(User user, Double requestedAmount, Integer tenureMonths, String purpose) {
-        this.user = user;
-        this.requestedAmount = requestedAmount;
-        this.tenureMonths = tenureMonths;
-        this.purpose = purpose;
-    }
-
-    // Getters and Setters
-    // ...
+    public User getUser() { return user; }
 }
-
