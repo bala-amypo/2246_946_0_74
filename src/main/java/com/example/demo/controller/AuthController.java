@@ -5,7 +5,6 @@ import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -15,48 +14,35 @@ import java.util.Map;
 public class AuthController {
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
     @Autowired
-    public AuthController(UserService userService, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
+    public AuthController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
     }
 
-    // Registration endpoint
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
-        if (userService.findByEmail(user.getEmail()).isPresent()) {
-            return ResponseEntity.badRequest().body(Map.of("error", "Email already exists"));
-        }
-
-        // Encode password before saving
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.save(user);
-
-        return ResponseEntity.ok(Map.of("message", "User registered successfully"));
+        User savedUser = userService.save(user); // now save() exists
+        return ResponseEntity.ok(savedUser);
     }
 
-    // Login endpoint
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody Map<String, String> authRequest) {
-        String email = authRequest.get("email");
-        String password = authRequest.get("password");
+    public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginRequest) {
+        String email = loginRequest.get("email");
+        String password = loginRequest.get("password");
 
-        // Get user by email safely using Optional
-        User user = userService.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
-
-        // Check password
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            return ResponseEntity.badRequest().body(Map.of("error", "Invalid password"));
+        User user = userService.findByEmail(email).orElse(null);
+        if (user == null) {
+            return ResponseEntity.badRequest().body("User not found");
         }
 
-        // Generate JWT token using email
-        String token = jwtUtil.generateToken(user.getEmail());
+        if (!user.getPassword().equals(password)) {
+            return ResponseEntity.badRequest().body("Invalid credentials");
+        }
 
+        String token = jwtUtil.generateToken(user.getEmail()); // use email for token
         return ResponseEntity.ok(Map.of("token", token));
     }
 }
