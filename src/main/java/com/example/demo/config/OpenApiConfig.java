@@ -23,7 +23,7 @@ public class OpenApiConfig {
                         .version("1.0")
                         .description("API for user registration, financial profiles, loan requests, eligibility evaluation, and risk assessment"))
                 .servers(List.of(
-                        new Server().url("https://9085.pro604cr.amypo.ai/")  // your server URL
+                        new Server().url("https://9085.vs.amypo.ai")  // your server URL
                 ))
                 // Add JWT security to Swagger
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
